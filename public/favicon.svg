@@ -1,0 +1,28 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="badge" x1="56" y1="50" x2="200" y2="212" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFFDF2"/>
+<stop offset="1" stop-color="#FFE7A1"/>
+</linearGradient>
+<linearGradient id="face" x1="86" y1="74" x2="171" y2="177" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE86D"/>
+<stop offset="1" stop-color="#FFD13B"/>
+</linearGradient>
+<linearGradient id="bolt" x1="108" y1="167" x2="151" y2="214" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFB74A"/>
+<stop offset="1" stop-color="#FF8900"/>
+</linearGradient>
+</defs>
+<path d="M88 67L74 27C71 17 78 8 88 8C93 8 98 11 100 16L118 57L88 67Z" fill="#FFD84D" stroke="#2B220D" stroke-width="8" stroke-linejoin="round"/>
+<path d="M138 57L156 16C158 11 163 8 168 8C178 8 185 17 182 27L168 67L138 57Z" fill="#FFD84D" stroke="#2B220D" stroke-width="8" stroke-linejoin="round"/>
+<path d="M81 19L105 53L117 49L99 16C98 12 93 8 88 8C80 8 75 14 75 21C75 21 77 20 81 19Z" fill="#1F1A17"/>
+<path d="M139 49L151 53L175 19C179 20 181 21 181 21C181 14 176 8 168 8C163 8 158 12 157 16L139 49Z" fill="#1F1A17"/>
+<circle cx="128" cy="128" r="82" fill="url(#badge)" stroke="#2B220D" stroke-width="8"/>
+<circle cx="128" cy="125" r="60" fill="url(#face)" stroke="#2B220D" stroke-width="8"/>
+<circle cx="99" cy="139" r="12" fill="#FF6B6B" stroke="#2B220D" stroke-width="6"/>
+<circle cx="157" cy="139" r="12" fill="#FF6B6B" stroke="#2B220D" stroke-width="6"/>
+<ellipse cx="106" cy="112" rx="7" ry="10" fill="#2B220D"/>
+<path d="M140 113C144 106 154 106 158 113" stroke="#2B220D" stroke-width="7" stroke-linecap="round"/>
+<path d="M114 157C122 165 134 165 142 157" stroke="#2B220D" stroke-width="7" stroke-linecap="round"/>
+<path d="M121 167H141L132 188H154L118 228L128 199H105L121 167Z" fill="url(#bolt)" stroke="#2B220D" stroke-width="8" stroke-linejoin="round"/>
+</svg>

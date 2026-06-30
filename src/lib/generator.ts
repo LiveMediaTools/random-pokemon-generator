@@ -1,6 +1,7 @@
 import seedrandom from "seedrandom";
 import { ALL_POKEMON, Pokemon } from "@/data/pokemon";
 import { PokeType, TYPES } from "@/data/types";
+import { resolvePokemonSpriteUrl } from "./assets";
 
 export interface Filters {
   count: number; // 1..6
@@ -113,8 +114,7 @@ export function filtersToSearch(f: Filters, seed: string): Record<string, string
 }
 
 export function spriteUrl(p: Pokemon, shiny = false): string {
-  if (!shiny) return p.sprite;
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${p.id}.png`;
+  return resolvePokemonSpriteUrl(p.id, p.sprite, shiny);
 }
 
 export { TYPES };

@@ -21,6 +21,14 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_THEME_COLOR,
+  SITE_TITLE,
+  SITE_URL,
+  getSiteAssetUrl,
+} from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -91,30 +99,54 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Random Pokemon Generator — Roll Teams, Nuzlockes & Shinies" },
-      { name: "description", content: "Generate a random Pokémon or a full random team instantly. Filter by type, generation, evolution, and rarity. Perfect for Nuzlockes, Monotype runs, and Shiny hunts." },
-      { name: "author", content: "RandomPoké" },
-      { property: "og:title", content: "Random Pokemon Generator — RandomPoké" },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: SITE_NAME },
+      { name: "application-name", content: SITE_NAME },
+      { name: "apple-mobile-web-app-title", content: SITE_NAME },
+      { name: "theme-color", content: SITE_THEME_COLOR },
+      { property: "og:title", content: `${SITE_TITLE} — ${SITE_NAME}` },
       { property: "og:description", content: "Generate a random Pokémon or full team instantly. Built for Nuzlockes, Monotypes, and Shiny hunts." },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "RandomPoké" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:image", content: getSiteAssetUrl("/icon-512.png") },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@randompoke" },
+      { name: "twitter:image", content: getSiteAssetUrl("/icon-512.png") },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
+      { rel: "manifest", href: "/site.webmanifest" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "RandomPoké",
+          name: SITE_NAME,
           description: "Random Pokémon generator with team building, Nuzlocke encounters, daily challenges, and a complete long-tail generator matrix.",
+          url: SITE_URL || undefined,
+          image: getSiteAssetUrl("/icon-512.png"),
           potentialAction: {
             "@type": "SearchAction",
             target: "/random-pokemon-generator?seed={seed}",
             "query-input": "required name=seed",
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: SITE_URL || undefined,
+          logo: getSiteAssetUrl("/icon-512.png"),
+          image: getSiteAssetUrl("/icon-512.png"),
         }),
       },
     ],

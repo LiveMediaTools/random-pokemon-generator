@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useHistory } from "@/lib/storage";
 import { POKEMON_BY_ID } from "@/data/pokemon";
+import { spriteUrl } from "@/lib/generator";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/history")({
@@ -52,7 +53,7 @@ function HistoryPage() {
                 <div className="mt-3 flex flex-wrap gap-3">
                   {members.map((p, i) => p && (
                     <Link key={i} to="/pokemon/$slug" params={{ slug: p.slug }} className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-1.5 hover:border-primary">
-                      <img src={p.sprite} alt={p.name} loading="lazy" className="h-8 w-8 object-contain" />
+                      <img src={spriteUrl(p)} alt={p.name} loading="lazy" className="h-8 w-8 object-contain" />
                       <span className="text-sm font-semibold">{p.name}</span>
                     </Link>
                   ))}

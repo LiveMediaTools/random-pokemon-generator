@@ -1,12 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, Dices, Users, Trophy, Compass, Heart, Calendar, History } from "lucide-react";
+import { Dices, Users, Trophy, Compass, Heart, Calendar, History } from "lucide-react";
 import { useState } from "react";
+
+import { SiteLogo } from "@/components/site-logo";
 
 const nav = [
   { to: "/random-pokemon-generator", label: "Generate", icon: Dices },
   { to: "/random-pokemon-team-generator", label: "Team", icon: Users },
-  { to: "/challenges/nuzlocke", label: "Challenges", icon: Trophy },
-  { to: "/types/fire", label: "Types", icon: Compass },
+  { to: "/challenges/$slug", params: { slug: "nuzlocke" }, label: "Challenges", icon: Trophy },
+  { to: "/types/$type", params: { type: "fire" }, label: "Types", icon: Compass },
   { to: "/daily", label: "Daily", icon: Calendar },
   { to: "/history", label: "History", icon: History },
   { to: "/favorites", label: "Favorites", icon: Heart },
@@ -17,17 +19,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold text-foreground">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-[var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-pop)]">
-            <Sparkles className="h-5 w-5" />
-          </span>
-          <span>RandomPoké</span>
+        <Link to="/" className="text-foreground">
+          <SiteLogo />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
+              params={"params" in item ? item.params : undefined}
               className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "rounded-full px-3 py-1.5 text-sm font-medium bg-secondary text-foreground" }}
             >
@@ -50,6 +50,7 @@ export function SiteHeader() {
               <li key={item.to}>
                 <Link
                   to={item.to}
+                  params={"params" in item ? item.params : undefined}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-2 rounded-xl border border-border bg-background px-3 py-2 text-sm font-medium"
                 >

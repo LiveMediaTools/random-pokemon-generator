@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useFavorites, useTeams } from "@/lib/storage";
 import { POKEMON_BY_ID } from "@/data/pokemon";
 import { PokemonCard } from "@/components/pokemon-card";
+import { spriteUrl } from "@/lib/generator";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/favorites")({
@@ -71,7 +72,7 @@ function FavoritesPage() {
                   <div className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-6">
                     {members.map((p, i) => p && (
                       <Link key={i} to="/pokemon/$slug" params={{ slug: p.slug }} className="flex flex-col items-center text-center">
-                        <img src={p.sprite} alt={p.name} loading="lazy" className="h-16 w-16 object-contain" />
+                        <img src={spriteUrl(p)} alt={p.name} loading="lazy" className="h-16 w-16 object-contain" />
                         <span className="mt-1 text-xs font-semibold">{p.name}</span>
                       </Link>
                     ))}

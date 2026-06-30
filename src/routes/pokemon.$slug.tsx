@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { POKEMON_BY_SLUG } from "@/data/pokemon";
 import { TYPES, TYPE_META, PokeType } from "@/data/types";
 import { takenFrom } from "@/data/typeChart";
+import { spriteUrl } from "@/lib/generator";
 
 export const Route = createFileRoute("/pokemon/$slug")({
   loader: ({ params }) => {
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/pokemon/$slug")({
         { title: `${p.name} — Random Pokemon Profile` },
         { name: "description", content: `${p.name} (#${p.id}) — ${p.types.join("/")}, Gen ${p.generation}. BST ${p.bst}. View stats, type matchups, and roll random teams featuring ${p.name}.` },
         { property: "og:url", content: `/pokemon/${p.slug}` },
-        { property: "og:image", content: p.sprite },
+        { property: "og:image", content: spriteUrl(p) },
       ],
       links: [{ rel: "canonical", href: `/pokemon/${p.slug}` }],
     };
@@ -49,7 +50,7 @@ function PokemonPage() {
     <div>
       <header className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${bg}, ${bg}aa)` }}>
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-12 md:flex-row md:px-6 md:py-16">
-          <img src={p.sprite} alt={p.name} className="h-56 w-56 object-contain drop-shadow-xl" />
+          <img src={spriteUrl(p)} alt={p.name} className="h-56 w-56 object-contain drop-shadow-xl" />
           <div className="flex-1 text-center md:text-left" style={{ color: TYPE_META[primary].text }}>
             <div className="text-sm font-semibold opacity-90">#{String(p.id).padStart(4, "0")} · Generation {p.generation}</div>
             <h1 className="mt-1 font-display text-4xl font-extrabold tracking-tight md:text-6xl">{p.name}</h1>
