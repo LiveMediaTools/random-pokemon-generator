@@ -57,7 +57,7 @@ function GenPage() {
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
-            { label: "Generations", to: "/" },
+              { label: "Generations", to: "/generations" },
             { label: region },
           ]}
         />

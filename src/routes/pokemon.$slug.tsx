@@ -87,7 +87,7 @@ function PokemonPage() {
             <SeoBreadcrumbs
               items={[
                 { label: "Home", to: "/" },
-                { label: "Pokedex", to: "/" },
+                { label: "Pokemon", to: "/pokemon" },
                 { label: p.name },
               ]}
               className="justify-center text-white/80 md:justify-start"

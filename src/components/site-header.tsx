@@ -7,8 +7,8 @@ import { SiteLogo } from "@/components/site-logo";
 const nav = [
   { to: "/random-pokemon-generator", label: "Generate", icon: Dices },
   { to: "/random-pokemon-team-generator", label: "Team", icon: Users },
-  { to: "/challenges/$slug", params: { slug: "nuzlocke" }, label: "Challenges", icon: Trophy },
-  { to: "/types/$type", params: { type: "fire" }, label: "Types", icon: Compass },
+  { to: "/challenges", label: "Challenges", icon: Trophy },
+  { to: "/types", label: "Types", icon: Compass },
   { to: "/daily", label: "Daily", icon: Calendar },
   { to: "/history", label: "History", icon: History },
   { to: "/favorites", label: "Favorites", icon: Heart },
@@ -27,7 +27,6 @@ export function SiteHeader() {
             <Link
               key={item.to}
               to={item.to}
-              params={"params" in item ? item.params : undefined}
               className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "rounded-full px-3 py-1.5 text-sm font-medium bg-secondary text-foreground" }}
             >
@@ -50,7 +49,6 @@ export function SiteHeader() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  params={"params" in item ? item.params : undefined}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-2 rounded-xl border border-border bg-background px-3 py-2 text-sm font-medium"
                 >

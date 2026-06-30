@@ -71,6 +71,10 @@ function createUrl(path, changefreq, priority) {
 
 const urls = [
   createUrl("/", "daily", "1.0"),
+  createUrl("/pokemon", "weekly", "0.9"),
+  createUrl("/types", "weekly", "0.8"),
+  createUrl("/generations", "weekly", "0.8"),
+  createUrl("/challenges", "weekly", "0.8"),
   createUrl("/random-pokemon-generator", "daily", "0.9"),
   createUrl("/random-pokemon-team-generator", "daily", "0.9"),
   createUrl("/daily", "daily", "0.8"),

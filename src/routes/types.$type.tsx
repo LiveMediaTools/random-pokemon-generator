@@ -60,7 +60,7 @@ function TypePage() {
           <SeoBreadcrumbs
             items={[
               { label: "Home", to: "/" },
-              { label: "Types", to: "/" },
+              { label: "Types", to: "/types" },
               { label: `${meta.label} Type` },
             ]}
             className="text-white/80"

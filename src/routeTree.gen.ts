@@ -15,6 +15,10 @@ import { Route as HistoryRouteImport } from './routes/history'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as DailyRouteImport } from './routes/daily'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TypesIndexRouteImport } from './routes/types/index'
+import { Route as PokemonIndexRouteImport } from './routes/pokemon/index'
+import { Route as GenerationsIndexRouteImport } from './routes/generations/index'
+import { Route as ChallengesIndexRouteImport } from './routes/challenges/index'
 import { Route as TypesTypeRouteImport } from './routes/types.$type'
 import { Route as PokemonSlugRouteImport } from './routes/pokemon.$slug'
 import { Route as GenerationsGenRouteImport } from './routes/generations.$gen'
@@ -51,6 +55,26 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TypesIndexRoute = TypesIndexRouteImport.update({
+  id: '/types/',
+  path: '/types/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PokemonIndexRoute = PokemonIndexRouteImport.update({
+  id: '/pokemon/',
+  path: '/pokemon/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GenerationsIndexRoute = GenerationsIndexRouteImport.update({
+  id: '/generations/',
+  path: '/generations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChallengesIndexRoute = ChallengesIndexRouteImport.update({
+  id: '/challenges/',
+  path: '/challenges/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TypesTypeRoute = TypesTypeRouteImport.update({
   id: '/types/$type',
   path: '/types/$type',
@@ -83,6 +107,10 @@ export interface FileRoutesByFullPath {
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
   '/types/$type': typeof TypesTypeRoute
+  '/challenges/': typeof ChallengesIndexRoute
+  '/generations/': typeof GenerationsIndexRoute
+  '/pokemon/': typeof PokemonIndexRoute
+  '/types/': typeof TypesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,6 +123,10 @@ export interface FileRoutesByTo {
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
   '/types/$type': typeof TypesTypeRoute
+  '/challenges': typeof ChallengesIndexRoute
+  '/generations': typeof GenerationsIndexRoute
+  '/pokemon': typeof PokemonIndexRoute
+  '/types': typeof TypesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,6 +140,10 @@ export interface FileRoutesById {
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
   '/types/$type': typeof TypesTypeRoute
+  '/challenges/': typeof ChallengesIndexRoute
+  '/generations/': typeof GenerationsIndexRoute
+  '/pokemon/': typeof PokemonIndexRoute
+  '/types/': typeof TypesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,6 +158,10 @@ export interface FileRouteTypes {
     | '/generations/$gen'
     | '/pokemon/$slug'
     | '/types/$type'
+    | '/challenges/'
+    | '/generations/'
+    | '/pokemon/'
+    | '/types/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,6 +174,10 @@ export interface FileRouteTypes {
     | '/generations/$gen'
     | '/pokemon/$slug'
     | '/types/$type'
+    | '/challenges'
+    | '/generations'
+    | '/pokemon'
+    | '/types'
   id:
     | '__root__'
     | '/'
@@ -146,6 +190,10 @@ export interface FileRouteTypes {
     | '/generations/$gen'
     | '/pokemon/$slug'
     | '/types/$type'
+    | '/challenges/'
+    | '/generations/'
+    | '/pokemon/'
+    | '/types/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +207,10 @@ export interface RootRouteChildren {
   GenerationsGenRoute: typeof GenerationsGenRoute
   PokemonSlugRoute: typeof PokemonSlugRoute
   TypesTypeRoute: typeof TypesTypeRoute
+  ChallengesIndexRoute: typeof ChallengesIndexRoute
+  GenerationsIndexRoute: typeof GenerationsIndexRoute
+  PokemonIndexRoute: typeof PokemonIndexRoute
+  TypesIndexRoute: typeof TypesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -205,6 +257,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/types/': {
+      id: '/types/'
+      path: '/types'
+      fullPath: '/types/'
+      preLoaderRoute: typeof TypesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pokemon/': {
+      id: '/pokemon/'
+      path: '/pokemon'
+      fullPath: '/pokemon/'
+      preLoaderRoute: typeof PokemonIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/generations/': {
+      id: '/generations/'
+      path: '/generations'
+      fullPath: '/generations/'
+      preLoaderRoute: typeof GenerationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/challenges/': {
+      id: '/challenges/'
+      path: '/challenges'
+      fullPath: '/challenges/'
+      preLoaderRoute: typeof ChallengesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/types/$type': {
       id: '/types/$type'
       path: '/types/$type'
@@ -247,6 +327,10 @@ const rootRouteChildren: RootRouteChildren = {
   GenerationsGenRoute: GenerationsGenRoute,
   PokemonSlugRoute: PokemonSlugRoute,
   TypesTypeRoute: TypesTypeRoute,
+  ChallengesIndexRoute: ChallengesIndexRoute,
+  GenerationsIndexRoute: GenerationsIndexRoute,
+  PokemonIndexRoute: PokemonIndexRoute,
+  TypesIndexRoute: TypesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

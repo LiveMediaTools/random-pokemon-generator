@@ -96,6 +96,11 @@ function HomePage() {
             </Link>
           ))}
         </div>
+        <div className="mt-4">
+          <Link to="/challenges" className="text-sm font-semibold text-primary hover:underline">
+            Browse all challenge archives →
+          </Link>
+        </div>
       </section>
 
       {/* WHY */}
@@ -123,6 +128,11 @@ function HomePage() {
             </Link>
           ))}
         </div>
+        <div className="mt-4">
+          <Link to="/types" className="text-sm font-semibold text-primary hover:underline">
+            Browse all type archives →
+          </Link>
+        </div>
         <SectionHead className="mt-12" title="Browse by generation" subtitle="From Kanto to Paldea — every regional dex with its own random generator." />
         <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {GENERATIONS.map((g) => (
@@ -136,6 +146,14 @@ function HomePage() {
               <div className="text-xs text-muted-foreground">{g.region[0].toUpperCase() + g.region.slice(1)} · {g.range}</div>
             </Link>
           ))}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-4">
+          <Link to="/generations" className="text-sm font-semibold text-primary hover:underline">
+            Browse all generation archives →
+          </Link>
+          <Link to="/pokemon" className="text-sm font-semibold text-primary hover:underline">
+            Browse the full Pokemon archive →
+          </Link>
         </div>
       </section>
 

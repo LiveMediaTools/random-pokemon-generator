@@ -66,7 +66,7 @@ function ChallengePage() {
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
-            { label: "Challenges", to: "/" },
+            { label: "Challenges", to: "/challenges" },
             { label: preset.title },
           ]}
         />
