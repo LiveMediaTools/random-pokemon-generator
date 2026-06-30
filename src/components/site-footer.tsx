@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-4 md:px-6">
         <div>
-          <div className="font-display text-lg font-bold">RandomPoké</div>
+          <h2 className="font-display text-lg font-bold">RandomPoké</h2>
           <p className="mt-3 text-sm text-muted-foreground">
             The complete random Pokémon generator. Roll teams, hunt shinies, tackle Nuzlockes.
           </p>
@@ -55,7 +55,7 @@ export function SiteFooter() {
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">{title}</div>
+      <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">{title}</h3>
       <div className="mt-3 flex flex-col gap-2">{children}</div>
     </div>
   );

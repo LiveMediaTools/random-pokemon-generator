@@ -73,7 +73,7 @@ function HomePage() {
                 <Trophy className="h-4 w-4" />
                 <span className="text-[11px] font-semibold uppercase tracking-wider">Preset</span>
               </div>
-              <div className="mt-2 font-display text-lg font-bold leading-tight">{p.title}</div>
+              <h3 className="mt-2 font-display text-lg font-bold leading-tight">{p.title}</h3>
               <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
               <div className="mt-3 text-xs font-semibold text-primary group-hover:underline">Open generator →</div>
             </Link>
@@ -192,7 +192,7 @@ function Why({ icon: Icon, title, desc }: { icon: any; title: string; desc: stri
       <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-pop)]">
         <Icon className="h-5 w-5" />
       </div>
-      <div className="mt-3 font-display text-lg font-bold">{title}</div>
+      <h3 className="mt-3 font-display text-lg font-bold">{title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
     </div>
   );
