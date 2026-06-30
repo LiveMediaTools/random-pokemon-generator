@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { GeneratorSurface } from "@/components/generator-surface";
 import { dailySeed } from "@/lib/generator";
-import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/daily")({
   head: () => ({
@@ -12,6 +13,16 @@ export const Route = createFileRoute("/daily")({
     }),
     links: buildCanonicalLink("/daily"),
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Daily Pokémon Challenge",
+          description: "A new fixed random Pokémon team every UTC day. Everyone gets the same roll — compare your best 6 with friends.",
+          url: getCanonicalUrl("/daily"),
+        }),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify(
@@ -32,6 +43,12 @@ function DailyPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
       <header className="mb-8 max-w-3xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Home", to: "/" },
+            { label: "Daily Challenge" },
+          ]}
+        />
         <span className="inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
           Daily · {today} UTC
         </span>

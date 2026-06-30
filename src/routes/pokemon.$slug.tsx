@@ -1,9 +1,10 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { POKEMON_BY_SLUG } from "@/data/pokemon";
 import { TYPES, TYPE_META, PokeType } from "@/data/types";
 import { takenFrom } from "@/data/typeChart";
 import { spriteUrl } from "@/lib/generator";
-import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/pokemon/$slug")({
   loader: ({ params }) => {
@@ -23,6 +24,25 @@ export const Route = createFileRoute("/pokemon/$slug")({
       }),
       links: buildCanonicalLink(`/pokemon/${p.slug}`),
       scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Thing",
+            name: p.name,
+            description: `${p.name} is a ${p.types.join("/")} Pokémon from Generation ${p.generation}.`,
+            url: getCanonicalUrl(`/pokemon/${p.slug}`),
+            image: spriteUrl(p),
+            identifier: `National Dex #${p.id}`,
+            additionalProperty: [
+              { "@type": "PropertyValue", name: "Generation", value: String(p.generation) },
+              { "@type": "PropertyValue", name: "Types", value: p.types.join(", ") },
+              { "@type": "PropertyValue", name: "Base stat total", value: String(p.bst) },
+              { "@type": "PropertyValue", name: "Height", value: `${(p.height / 10).toFixed(1)} m` },
+              { "@type": "PropertyValue", name: "Weight", value: `${(p.weight / 10).toFixed(1)} kg` },
+            ],
+          }),
+        },
         {
           type: "application/ld+json",
           children: JSON.stringify(
@@ -64,6 +84,17 @@ function PokemonPage() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-12 md:flex-row md:px-6 md:py-16">
           <img src={spriteUrl(p)} alt={p.name} className="h-56 w-56 object-contain drop-shadow-xl" />
           <div className="flex-1 text-center md:text-left" style={{ color: TYPE_META[primary].text }}>
+            <SeoBreadcrumbs
+              items={[
+                { label: "Home", to: "/" },
+                { label: "Pokedex", to: "/" },
+                { label: p.name },
+              ]}
+              className="justify-center text-white/80 md:justify-start"
+              linkClassName="text-white/80 hover:text-white"
+              currentClassName="text-white"
+              separatorClassName="text-white/60"
+            />
             <div className="text-sm font-semibold opacity-90">#{String(p.id).padStart(4, "0")} · Generation {p.generation}</div>
             <h1 className="mt-1 font-display text-4xl font-extrabold tracking-tight md:text-6xl">{p.name}</h1>
             <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">

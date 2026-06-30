@@ -1,7 +1,8 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { GENERATIONS } from "@/data/types";
 import { GeneratorSurface } from "@/components/generator-surface";
-import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/generations/$gen")({
   loader: ({ params }) => {
@@ -24,6 +25,16 @@ export const Route = createFileRoute("/generations/$gen")({
       scripts: [
         {
           type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `Random ${label} Pokemon Generator`,
+            description: `Generate a random Pokémon from ${label}. Roll a single mon or a full 6-mon ${label} team instantly.`,
+            url: getCanonicalUrl(`/generations/${params.gen}`),
+          }),
+        },
+        {
+          type: "application/ld+json",
           children: JSON.stringify(
             buildBreadcrumbSchema([
               { name: "Home", path: "/" },
@@ -43,6 +54,13 @@ function GenPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
       <header className="mb-8 max-w-3xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Home", to: "/" },
+            { label: "Generations", to: "/" },
+            { label: region },
+          ]}
+        />
         <Link to="/" className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline">← All generations</Link>
         <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">
           Random {region} Pokémon

@@ -9,7 +9,8 @@ export const Route = createFileRoute("/history")({
     meta: [
       { title: "Roll History — RandomPoké" },
       { name: "description", content: "Your last 50 random generations on this device. Re-open any roll instantly." },
-      { name: "robots", content: "noindex" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      { name: "googlebot", content: "noindex, nofollow, noarchive" },
     ],
   }),
   component: HistoryPage,

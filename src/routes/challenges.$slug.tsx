@@ -1,4 +1,5 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { PRESETS, PRESET_BY_SLUG } from "@/data/presets";
 import { GeneratorSurface } from "@/components/generator-surface";
 import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
@@ -62,6 +63,13 @@ function ChallengePage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
       <header className="mb-8 max-w-3xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Home", to: "/" },
+            { label: "Challenges", to: "/" },
+            { label: preset.title },
+          ]}
+        />
         <Link to="/" className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline">
           ← All challenges
         </Link>

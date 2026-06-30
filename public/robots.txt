@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-# Private, browser-only utility pages
-Disallow: /favorites
-Disallow: /history
-
 Sitemap: https://random-pokemon-generator.com/sitemap.xml

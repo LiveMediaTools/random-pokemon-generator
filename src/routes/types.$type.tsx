@@ -1,7 +1,8 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { TYPES, TYPE_META, PokeType } from "@/data/types";
 import { GeneratorSurface } from "@/components/generator-surface";
-import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/types/$type")({
   loader: ({ params }) => {
@@ -20,6 +21,20 @@ export const Route = createFileRoute("/types/$type")({
       }),
       links: buildCanonicalLink(`/types/${t}`),
       scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `Random ${label}-type Pokémon`,
+            description: `Generate a random ${label}-type Pokémon or a full mono-${label} team. Includes coverage and weakness analysis.`,
+            url: getCanonicalUrl(`/types/${t}`),
+            about: {
+              "@type": "Thing",
+              name: `${label}-type Pokémon`,
+            },
+          }),
+        },
         {
           type: "application/ld+json",
           children: JSON.stringify(
@@ -42,6 +57,17 @@ function TypePage() {
     <div>
       <header className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${meta.bg}, ${meta.bg}aa)` }}>
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16" style={{ color: meta.text }}>
+          <SeoBreadcrumbs
+            items={[
+              { label: "Home", to: "/" },
+              { label: "Types", to: "/" },
+              { label: `${meta.label} Type` },
+            ]}
+            className="text-white/80"
+            linkClassName="text-white/80 hover:text-white"
+            currentClassName="text-white"
+            separatorClassName="text-white/60"
+          />
           <Link to="/" className="text-xs font-semibold uppercase tracking-wider opacity-90 hover:underline">← All types</Link>
           <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-6xl">
             Random {meta.label}-type Pokémon

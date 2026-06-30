@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SeoBreadcrumbs } from "@/components/seo-breadcrumbs";
 import { GeneratorSurface } from "@/components/generator-surface";
 import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
@@ -30,6 +31,12 @@ function Page() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
       <header className="mb-8 max-w-3xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Home", to: "/" },
+            { label: "Team Generator" },
+          ]}
+        />
         <h1 className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">Random Pokemon Team Generator</h1>
         <p className="mt-3 text-muted-foreground">
           Generate a full 6-Pokémon team in one click. Coverage and weakness analysis update with every roll so you can spot the weak link instantly.

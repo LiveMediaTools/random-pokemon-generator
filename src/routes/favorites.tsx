@@ -10,7 +10,8 @@ export const Route = createFileRoute("/favorites")({
     meta: [
       { title: "Your Favorites — RandomPoké" },
       { name: "description", content: "Pokémon and teams you've saved on this device." },
-      { name: "robots", content: "noindex" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      { name: "googlebot", content: "noindex, nofollow, noarchive" },
     ],
   }),
   component: FavoritesPage,
