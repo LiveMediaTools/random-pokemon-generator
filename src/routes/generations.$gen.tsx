@@ -1,6 +1,7 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { GENERATIONS } from "@/data/types";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/generations/$gen")({
   loader: ({ params }) => {
@@ -14,12 +15,23 @@ export const Route = createFileRoute("/generations/$gen")({
     const meta = GENERATIONS.find((x) => x.gen === g);
     const label = meta ? `${meta.region[0].toUpperCase() + meta.region.slice(1)} (Gen ${meta.gen})` : `Gen ${params.gen}`;
     return {
-      meta: [
-        { title: `Random ${label} Pokemon Generator — RandomPoké` },
-        { name: "description", content: `Generate a random Pokémon from ${label}. Roll a single mon or a full 6-mon ${label} team instantly.` },
-        { property: "og:url", content: `/generations/${params.gen}` },
+      meta: buildSeoMeta({
+        title: `Random ${label} Pokemon Generator — RandomPoké`,
+        description: `Generate a random Pokémon from ${label}. Roll a single mon or a full 6-mon ${label} team instantly.`,
+        path: `/generations/${params.gen}`,
+      }),
+      links: buildCanonicalLink(`/generations/${params.gen}`),
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: label, path: `/generations/${params.gen}` },
+            ]),
+          ),
+        },
       ],
-      links: [{ rel: "canonical", href: `/generations/${params.gen}` }],
     };
   },
   component: GenPage,

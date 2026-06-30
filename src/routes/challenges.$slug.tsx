@@ -1,6 +1,7 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { PRESETS, PRESET_BY_SLUG } from "@/data/presets";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/challenges/$slug")({
   loader: ({ params }) => {
@@ -12,15 +13,23 @@ export const Route = createFileRoute("/challenges/$slug")({
     const p = loaderData?.preset;
     if (!p) return {};
     return {
-      meta: [
-        { title: `${p.title} — RandomPoké` },
-        { name: "description", content: p.description },
-        { property: "og:title", content: p.title },
-        { property: "og:description", content: p.description },
-        { property: "og:url", content: `/challenges/${p.slug}` },
-      ],
-      links: [{ rel: "canonical", href: `/challenges/${p.slug}` }],
+      meta: buildSeoMeta({
+        title: `${p.title} — RandomPoké`,
+        description: p.description,
+        path: `/challenges/${p.slug}`,
+      }),
+      links: buildCanonicalLink(`/challenges/${p.slug}`),
       scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: p.title,
+            description: p.description,
+            url: getCanonicalUrl(`/challenges/${p.slug}`),
+          }),
+        },
         {
           type: "application/ld+json",
           children: JSON.stringify({
@@ -32,6 +41,15 @@ export const Route = createFileRoute("/challenges/$slug")({
               acceptedAnswer: { "@type": "Answer", text: f.a },
             })),
           }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: p.title, path: `/challenges/${p.slug}` },
+            ]),
+          ),
         },
       ],
     };

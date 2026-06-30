@@ -1,16 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/random-pokemon-team-generator")({
   head: () => ({
-    meta: [
-      { title: "Random Pokemon Team Generator — 6-Mon Teams with Coverage" },
-      { name: "description", content: "Generate a balanced random 6-Pokémon team. Instantly see offensive coverage, shared weaknesses, and key resistances." },
-      { property: "og:title", content: "Random Pokemon Team Generator" },
-      { property: "og:description", content: "Generate a full 6-mon team with coverage and weakness analysis." },
-      { property: "og:url", content: "/random-pokemon-team-generator" },
+    meta: buildSeoMeta({
+      title: "Random Pokemon Team Generator — 6-Mon Teams with Coverage",
+      description:
+        "Generate a balanced random 6-Pokémon team. Instantly see offensive coverage, shared weaknesses, and key resistances.",
+      path: "/random-pokemon-team-generator",
+    }),
+    links: buildCanonicalLink("/random-pokemon-team-generator"),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Random Pokemon Team Generator", path: "/random-pokemon-team-generator" },
+          ]),
+        ),
+      },
     ],
-    links: [{ rel: "canonical", href: "/random-pokemon-team-generator" }],
   }),
   component: Page,
 });

@@ -1,15 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GeneratorSurface } from "@/components/generator-surface";
 import { dailySeed } from "@/lib/generator";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/daily")({
   head: () => ({
-    meta: [
-      { title: "Daily Random Pokemon Challenge — RandomPoké" },
-      { name: "description", content: "A new fixed random Pokémon team every UTC day. Everyone gets the same roll — compare your best 6 with friends." },
-      { property: "og:url", content: "/daily" },
+    meta: buildSeoMeta({
+      title: "Daily Random Pokemon Challenge — RandomPoké",
+      description: "A new fixed random Pokémon team every UTC day. Everyone gets the same roll — compare your best 6 with friends.",
+      path: "/daily",
+    }),
+    links: buildCanonicalLink("/daily"),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Daily Pokémon Challenge", path: "/daily" },
+          ]),
+        ),
+      },
     ],
-    links: [{ rel: "canonical", href: "/daily" }],
   }),
   component: DailyPage,
 });

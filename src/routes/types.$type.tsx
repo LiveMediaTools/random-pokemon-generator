@@ -1,6 +1,7 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { TYPES, TYPE_META, PokeType } from "@/data/types";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/types/$type")({
   loader: ({ params }) => {
@@ -12,12 +13,23 @@ export const Route = createFileRoute("/types/$type")({
     const t = params.type;
     const label = TYPE_META[t as PokeType]?.label ?? t;
     return {
-      meta: [
-        { title: `Random ${label}-type Pokemon Generator — RandomPoké` },
-        { name: "description", content: `Generate a random ${label}-type Pokémon or a full mono-${label} team. Includes coverage and weakness analysis.` },
-        { property: "og:url", content: `/types/${t}` },
+      meta: buildSeoMeta({
+        title: `Random ${label}-type Pokemon Generator — RandomPoké`,
+        description: `Generate a random ${label}-type Pokémon or a full mono-${label} team. Includes coverage and weakness analysis.`,
+        path: `/types/${t}`,
+      }),
+      links: buildCanonicalLink(`/types/${t}`),
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: `${label}-type Pokémon`, path: `/types/${t}` },
+            ]),
+          ),
+        },
       ],
-      links: [{ rel: "canonical", href: `/types/${t}` }],
     };
   },
   component: TypePage,

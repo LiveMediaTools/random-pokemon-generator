@@ -3,6 +3,7 @@ import { POKEMON_BY_SLUG } from "@/data/pokemon";
 import { TYPES, TYPE_META, PokeType } from "@/data/types";
 import { takenFrom } from "@/data/typeChart";
 import { spriteUrl } from "@/lib/generator";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/pokemon/$slug")({
   loader: ({ params }) => {
@@ -14,13 +15,24 @@ export const Route = createFileRoute("/pokemon/$slug")({
     const p = POKEMON_BY_SLUG.get(params.slug);
     if (!p) return {};
     return {
-      meta: [
-        { title: `${p.name} — Random Pokemon Profile` },
-        { name: "description", content: `${p.name} (#${p.id}) — ${p.types.join("/")}, Gen ${p.generation}. BST ${p.bst}. View stats, type matchups, and roll random teams featuring ${p.name}.` },
-        { property: "og:url", content: `/pokemon/${p.slug}` },
-        { property: "og:image", content: spriteUrl(p) },
+      meta: buildSeoMeta({
+        title: `${p.name} — Random Pokemon Profile`,
+        description: `${p.name} (#${p.id}) — ${p.types.join("/")}, Gen ${p.generation}. BST ${p.bst}. View stats, type matchups, and roll random teams featuring ${p.name}.`,
+        path: `/pokemon/${p.slug}`,
+        image: spriteUrl(p),
+      }),
+      links: buildCanonicalLink(`/pokemon/${p.slug}`),
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(
+            buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: p.name, path: `/pokemon/${p.slug}` },
+            ]),
+          ),
+        },
       ],
-      links: [{ rel: "canonical", href: `/pokemon/${p.slug}` }],
     };
   },
   component: PokemonPage,

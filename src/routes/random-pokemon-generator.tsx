@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/random-pokemon-generator")({
   head: () => ({
-    meta: [
-      { title: "Random Pokemon Generator — Full Filter Control" },
-      { name: "description", content: "Roll any random Pokémon from the full national Pokédex. Filter by type, generation, evolution stage, BST, and rarity — perfect for any challenge run." },
-      { property: "og:title", content: "Random Pokemon Generator — Full Filters" },
-      { property: "og:description", content: "Roll any random Pokémon from the full Pokédex with type, generation, BST, and rarity filters." },
-      { property: "og:url", content: "/random-pokemon-generator" },
-    ],
-    links: [{ rel: "canonical", href: "/random-pokemon-generator" }],
+    meta: buildSeoMeta({
+      title: "Random Pokemon Generator — Full Filter Control",
+      description:
+        "Roll any random Pokémon from the full national Pokédex. Filter by type, generation, evolution stage, BST, and rarity — perfect for any challenge run.",
+      path: "/random-pokemon-generator",
+    }),
+    links: buildCanonicalLink("/random-pokemon-generator"),
     scripts: [
       {
         type: "application/ld+json",
@@ -21,7 +21,17 @@ export const Route = createFileRoute("/random-pokemon-generator")({
           applicationCategory: "GameApplication",
           operatingSystem: "Any",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          url: getCanonicalUrl("/random-pokemon-generator"),
         }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Random Pokemon Generator", path: "/random-pokemon-generator" },
+          ]),
+        ),
       },
     ],
   }),

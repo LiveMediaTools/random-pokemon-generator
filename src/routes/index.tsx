@@ -4,17 +4,34 @@ import { Dices, Users, Trophy, Calendar, Sparkles } from "lucide-react";
 import { GeneratorSurface } from "@/components/generator-surface";
 import { PRESETS } from "@/data/presets";
 import { TYPES, TYPE_META, GENERATIONS } from "@/data/types";
+import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "Random Pokemon Generator — Roll Teams, Nuzlockes & Shinies" },
-      { name: "description", content: "Generate a random Pokémon or full 6-mon team instantly. Filter by type, generation, evolution, rarity. Built for Nuzlockes, Monotype runs, and Shiny hunts." },
-      { property: "og:title", content: "Random Pokemon Generator — RandomPoké" },
-      { property: "og:description", content: "Generate a random Pokémon or full team instantly. Built for Nuzlockes, Monotypes, and Shiny hunts." },
-      { property: "og:url", content: "/" },
+    meta: buildSeoMeta({
+      title: "Random Pokemon Generator — Roll Teams, Nuzlockes & Shinies",
+      description:
+        "Generate a random Pokémon or full 6-mon team instantly. Filter by type, generation, evolution, rarity. Built for Nuzlockes, Monotype runs, and Shiny hunts.",
+      path: "/",
+    }),
+    links: buildCanonicalLink("/"),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Random Pokemon Generator",
+          description:
+            "Generate a random Pokémon or full 6-mon team instantly. Filter by type, generation, evolution, rarity. Built for Nuzlockes, Monotype runs, and Shiny hunts.",
+          url: getCanonicalUrl("/"),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(buildBreadcrumbSchema([{ name: "Home", path: "/" }])),
+      },
     ],
-    links: [{ rel: "canonical", href: "/" }],
   }),
   component: HomePage,
 });
