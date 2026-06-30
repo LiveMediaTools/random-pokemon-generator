@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Dices, RefreshCw } from "lucide-react";
-import { Filters, generate, makeSeed, DEFAULT_FILTERS } from "@/lib/generator";
+import { Filters, generate, makeDeterministicSeed, makeSeed, DEFAULT_FILTERS } from "@/lib/generator";
 import { PokemonCard } from "./pokemon-card";
 import { FilterPanel } from "./filter-panel";
 import { TeamCoverage } from "./team-coverage";
@@ -25,12 +25,12 @@ export function GeneratorSurface({
   lockFilters = false,
   ctaLabel = "Generate",
 }: Props) {
-  const [filters, setFilters] = useState<Filters>({ ...DEFAULT_FILTERS, ...initialFilters });
-  const [seed, setSeed] = useState<string>(initialSeed ?? "");
-  useEffect(() => {
-    if (!seed) setSeed(makeSeed());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const mergedInitialFilters = useMemo(() => ({ ...DEFAULT_FILTERS, ...initialFilters }), [initialFilters]);
+  const [filters, setFilters] = useState<Filters>(mergedInitialFilters);
+  const [seed, setSeed] = useState<string>(() => {
+    if (initialSeed) return initialSeed;
+    return makeDeterministicSeed(`${basePath}:${JSON.stringify(mergedInitialFilters)}`);
+  });
   const exportRef = useRef<HTMLDivElement>(null);
   const { push } = useHistory();
   const team = useMemo(() => generate(filters, seed), [filters, seed]);

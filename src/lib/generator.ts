@@ -85,6 +85,15 @@ export function makeSeed(): string {
   return Math.random().toString(36).slice(2, 10);
 }
 
+export function makeDeterministicSeed(input: string): string {
+  let hash = 2166136261;
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `seed-${(hash >>> 0).toString(36)}`;
+}
+
 export function dailySeed(date = new Date()): string {
   const y = date.getUTCFullYear();
   const m = String(date.getUTCMonth() + 1).padStart(2, "0");
