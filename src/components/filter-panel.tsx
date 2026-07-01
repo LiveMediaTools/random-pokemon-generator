@@ -16,7 +16,7 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
 
   return (
     <div className="space-y-3">
-      <div className={`grid gap-3 ${compact ? "grid-cols-2" : "grid-cols-2 md:grid-cols-4"}`}>
+      <div className={`grid gap-2.5 ${compact ? "grid-cols-2" : "grid-cols-2 xl:grid-cols-4"}`}>
         <Field label="Count">
           <select
             value={v.count}
@@ -65,7 +65,7 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
         </Field>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 text-sm">
+      <div className="flex flex-wrap items-center gap-2 text-sm">
         <Toggle checked={!!v.fullyEvolvedOnly} onChange={(b) => set({ fullyEvolvedOnly: b })}>Fully evolved only</Toggle>
         <Toggle checked={!!v.excludeLegendary} onChange={(b) => set({ excludeLegendary: b })}>Exclude Legendary</Toggle>
         <Toggle checked={!!v.excludeMythical} onChange={(b) => set({ excludeMythical: b })}>Exclude Mythical</Toggle>
@@ -83,8 +83,8 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
       </div>
 
       {advanced && (
-        <div className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-4">
-          <div className="grid gap-3 md:grid-cols-3">
+        <div className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-3.5 md:p-4">
+          <div className="grid gap-2.5 xl:grid-cols-3">
             <Field label="Second type">
               <select
                 value={v.secondType ?? "any"}
@@ -127,7 +127,7 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
                 placeholder="e.g. 600"
               />
             </Field>
-            <div className="flex flex-wrap items-center gap-2 md:col-span-2">
+            <div className="flex flex-wrap items-center gap-2 xl:col-span-2">
               <Toggle checked={!!v.onlyLegendary} onChange={(b) => set({ onlyLegendary: b })}>Only Legendary</Toggle>
               <Toggle checked={!!v.onlyMythical} onChange={(b) => set({ onlyMythical: b })}>Only Mythical</Toggle>
               <Toggle checked={!!v.onlyParadox} onChange={(b) => set({ onlyParadox: b })}>Only Paradox</Toggle>
@@ -145,8 +145,8 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
           background: var(--color-surface);
           border: 1px solid var(--color-border);
           border-radius: 0.75rem;
-          padding: 0.55rem 0.75rem;
-          font-size: 0.875rem;
+          padding: 0.5rem 0.7rem;
+          font-size: 0.8125rem;
           font-weight: 500;
           color: var(--color-foreground);
           outline: none;
@@ -160,7 +160,7 @@ export function FilterPanel({ value, onChange, compact = false }: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</span>
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</span>
       {children}
     </label>
   );
@@ -171,7 +171,7 @@ function Toggle({ checked, onChange, children }: { checked: boolean; onChange: (
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+      className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
         checked ? "border-primary bg-primary/10 text-primary" : "border-border bg-surface text-muted-foreground hover:text-foreground"
       }`}
     >

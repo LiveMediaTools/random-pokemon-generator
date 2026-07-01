@@ -19,7 +19,7 @@ export function PokemonCard({ p, index = 0, shiny = false }: { p: Pokemon; index
       className="group relative overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-pop)]"
     >
       <div
-        className="relative h-36 overflow-hidden"
+        className="relative h-32 overflow-hidden md:h-36"
         style={{ background: `linear-gradient(135deg, ${bg}33, ${bg}10)` }}
       >
         <div className="absolute right-3 top-3 rounded-full bg-surface/80 px-2 py-0.5 text-[11px] font-semibold text-muted-foreground backdrop-blur">
@@ -39,11 +39,11 @@ export function PokemonCard({ p, index = 0, shiny = false }: { p: Pokemon; index
           height={180}
           loading="lazy"
           decoding="async"
-          className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-md transition-transform group-hover:scale-110"
+          className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-md transition-transform group-hover:scale-110 md:h-36 md:w-36"
         />
       </div>
-      <div className="p-4">
-        <Link to="/pokemon/$slug" params={{ slug: p.slug }} className="font-display text-lg font-bold leading-tight hover:text-primary">
+      <div className="p-3.5 md:p-4">
+        <Link to="/pokemon/$slug" params={{ slug: p.slug }} className="font-display text-base font-bold leading-tight hover:text-primary md:text-lg">
           {p.name}
         </Link>
         <div className="mt-1 flex flex-wrap gap-1">
@@ -60,7 +60,7 @@ export function PokemonCard({ p, index = 0, shiny = false }: { p: Pokemon; index
           {p.isMythical && <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[11px] font-semibold text-accent">Mythical</span>}
           {p.isParadox && <span className="rounded-full bg-primary/15 px-2 py-0.5 text-[11px] font-semibold text-primary">Paradox</span>}
         </div>
-        <div className="mt-3 flex items-center justify-between text-[11px] text-muted-foreground">
+        <div className="mt-2.5 flex items-center justify-between text-[11px] text-muted-foreground">
           <span>Gen {p.generation} · {p.region[0].toUpperCase() + p.region.slice(1)}</span>
           <span className="font-mono font-semibold text-foreground">BST {p.bst}</span>
         </div>

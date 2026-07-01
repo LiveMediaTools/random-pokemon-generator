@@ -189,14 +189,14 @@ export function ShareBar({ team, filters, seed, basePath, exportRef }: Props) {
     <div className="flex flex-wrap items-center gap-2">
       <button
         onClick={() => copy(shareUrl(), "link")}
-        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
+        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground hover:opacity-90 md:text-xs"
       >
         {copied === "link" ? <Check className="h-3.5 w-3.5" /> : <Link2 className="h-3.5 w-3.5" />}
         {copied === "link" ? "Copied!" : "Share link"}
       </button>
       <button
         onClick={() => copy(textVersion, "text")}
-        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold hover:bg-secondary"
+        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] font-semibold hover:bg-secondary md:text-xs"
       >
         {copied === "text" ? <Check className="h-3.5 w-3.5" /> : <FileText className="h-3.5 w-3.5" />}
         {copied === "text" ? "Copied!" : "Copy text"}
@@ -205,7 +205,7 @@ export function ShareBar({ team, filters, seed, basePath, exportRef }: Props) {
         <button
           onClick={exportImage}
           disabled={isExporting}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold hover:bg-secondary"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] font-semibold hover:bg-secondary md:text-xs"
         >
           <ImageIcon className="h-3.5 w-3.5" />
           {isExporting ? "Exporting..." : "Export PNG"}
@@ -213,7 +213,7 @@ export function ShareBar({ team, filters, seed, basePath, exportRef }: Props) {
       )}
       <button
         onClick={() => setShowSave((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold hover:bg-secondary"
+        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] font-semibold hover:bg-secondary md:text-xs"
       >
         <Bookmark className="h-3.5 w-3.5" />
         Save team
@@ -228,14 +228,14 @@ export function ShareBar({ team, filters, seed, basePath, exportRef }: Props) {
             setCopied("saved");
             setTimeout(() => setCopied(null), 1500);
           }}
-          className="flex items-center gap-2"
+          className="flex flex-wrap items-center gap-2"
         >
           <input
             ref={saveRef}
             placeholder="Team name"
-            className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs"
+            className="rounded-full border border-border bg-surface px-3 py-1.5 text-[11px] md:text-xs"
           />
-          <button type="submit" className="rounded-full bg-foreground px-3 py-1.5 text-xs font-semibold text-background">
+          <button type="submit" className="rounded-full bg-foreground px-3 py-1.5 text-[11px] font-semibold text-background md:text-xs">
             Save
           </button>
         </form>

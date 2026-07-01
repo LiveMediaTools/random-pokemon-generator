@@ -46,28 +46,28 @@ export function GeneratorSurface({
   const shiny = !!filters.shinyDisplay;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {!lockFilters && (
-        <div className="rounded-3xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-6">
+        <div className="rounded-3xl border border-border bg-card p-3.5 shadow-[var(--shadow-card)] md:p-4 lg:p-5">
           <FilterPanel value={filters} onChange={setFilters} compact={compact} />
         </div>
       )}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        <div className="text-xs text-muted-foreground md:text-sm">
           Seed: <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-foreground">{seed}</code>
         </div>
         <div className="flex items-center gap-2">
           <motion.button
             whileTap={{ scale: 0.95, rotate: -10 }}
             onClick={reroll}
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-4 py-2 text-sm font-bold text-zinc-950 shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.03]"
           >
             <Dices className="h-4 w-4" />
             {ctaLabel}
           </motion.button>
           <button
             onClick={reroll}
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-3 py-2 text-xs font-semibold hover:bg-secondary"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold hover:bg-secondary"
             aria-label="Reroll"
           >
             <RefreshCw className="h-3.5 w-3.5" />
@@ -77,13 +77,13 @@ export function GeneratorSurface({
       </div>
 
       {team.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border bg-secondary/40 p-10 text-center text-sm text-muted-foreground">
+        <div className="rounded-2xl border border-dashed border-border bg-secondary/40 p-8 text-center text-sm text-muted-foreground">
           No Pokémon match these filters. Try loosening them.
         </div>
       ) : (
         <>
-          <div ref={exportRef} className="rounded-2xl bg-background p-2">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div ref={exportRef} className="rounded-2xl bg-background p-1.5 md:p-2">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((p, i) => (
                 <PokemonCard key={`${seed}-${p.id}-${i}`} p={p} index={i} shiny={shiny} />
               ))}

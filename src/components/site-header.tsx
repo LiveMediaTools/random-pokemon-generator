@@ -18,17 +18,17 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 md:px-6 md:py-3">
         <Link to="/" className="text-foreground">
           <SiteLogo />
         </Link>
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              activeProps={{ className: "rounded-full px-3 py-1.5 text-sm font-medium bg-secondary text-foreground" }}
+              className="rounded-full px-2.5 py-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground xl:px-3 xl:text-sm"
+              activeProps={{ className: "rounded-full bg-secondary px-2.5 py-1.5 text-[13px] font-medium text-foreground xl:px-3 xl:text-sm" }}
             >
               {item.label}
             </Link>
@@ -36,14 +36,14 @@ export function SiteHeader() {
         </nav>
         <button
           onClick={() => setOpen((v) => !v)}
-          className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium md:hidden"
+          className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium lg:hidden"
           aria-label="Toggle navigation"
         >
           Menu
         </button>
       </div>
       {open && (
-        <nav className="border-t border-border bg-surface px-4 py-3 md:hidden">
+        <nav className="border-t border-border bg-surface px-4 py-3 lg:hidden">
           <ul className="grid grid-cols-2 gap-2">
             {nav.map((item) => (
               <li key={item.to}>

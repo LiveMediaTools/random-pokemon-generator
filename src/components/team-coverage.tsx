@@ -40,14 +40,14 @@ export function TeamCoverage({ team }: { team: Pokemon[] }) {
   if (new Set(team.flatMap((p) => p.types)).size <= 3) styles.push("Narrow coverage");
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
-      <div className="font-display text-lg font-bold">Team analysis</div>
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] md:p-5">
+      <div className="font-display text-base font-bold md:text-lg">Team analysis</div>
       <div className="mt-1 text-sm text-muted-foreground">
         Average BST <strong className="text-foreground">{avgBst}</strong> · Speed{" "}
         <strong className="text-foreground">{avgSpe}</strong> · {styles.join(" · ") || "Balanced"}
       </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <div className="mt-3 grid gap-3 md:grid-cols-2 md:gap-4">
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Offensive coverage ({offCovered.size}/18)</div>
           <div className="mt-2 flex flex-wrap gap-1">
