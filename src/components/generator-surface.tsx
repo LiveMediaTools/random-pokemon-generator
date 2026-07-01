@@ -25,15 +25,21 @@ export function GeneratorSurface({
   lockFilters = false,
   ctaLabel = "Generate",
 }: Props) {
-  const mergedInitialFilters = useMemo(() => ({ ...DEFAULT_FILTERS, ...initialFilters }), [initialFilters]);
+  const mergedInitialFilters = { ...DEFAULT_FILTERS, ...initialFilters };
+  const initialFiltersKey = JSON.stringify(mergedInitialFilters);
   const [filters, setFilters] = useState<Filters>(mergedInitialFilters);
   const [seed, setSeed] = useState<string>(() => {
     if (initialSeed) return initialSeed;
-    return makeDeterministicSeed(`${basePath}:${JSON.stringify(mergedInitialFilters)}`);
+    return makeDeterministicSeed(`${basePath}:${initialFiltersKey}`);
   });
   const exportRef = useRef<HTMLDivElement>(null);
   const { push } = useHistory();
   const team = useMemo(() => generate(filters, seed), [filters, seed]);
+
+  useEffect(() => {
+    setFilters(mergedInitialFilters);
+    setSeed(initialSeed ?? makeDeterministicSeed(`${basePath}:${initialFiltersKey}`));
+  }, [basePath, initialSeed, initialFiltersKey]);
 
   // Record to history when results change (skip empty)
   useEffect(() => {
