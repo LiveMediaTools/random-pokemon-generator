@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Dices, Users, Trophy, Calendar, Sparkles } from "lucide-react";
 import { GeneratorSurface } from "@/components/generator-surface";
+import { ALL_POKEMON } from "@/data/pokemon";
 import { PRESETS } from "@/data/presets";
 import { TYPES, TYPE_META, GENERATIONS } from "@/data/types";
+import { spriteUrl } from "@/lib/generator";
 import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -44,6 +46,36 @@ const faqs = [
   { q: "How are the daily challenges generated?", a: "Every UTC day uses a fixed seed, so every visitor sees the same daily team. Come back tomorrow for a new one." },
 ];
 
+const featuredPokemon = [
+  ALL_POKEMON.find((pokemon) => pokemon.isStarter && pokemon.generation === 1),
+  ALL_POKEMON.find((pokemon) => pokemon.isLegendary),
+  ALL_POKEMON.find((pokemon) => pokemon.isMythical),
+  ALL_POKEMON.find((pokemon) => pokemon.isParadox),
+].filter((pokemon): pokemon is (typeof ALL_POKEMON)[number] => Boolean(pokemon));
+
+const quickRoutes = [
+  {
+    title: "Full Pokedex Archive",
+    description: "Browse direct links to every Pokemon profile page.",
+    to: "/pokemon" as const,
+  },
+  {
+    title: "Type Archives",
+    description: "Jump into all 18 type-based generator hubs.",
+    to: "/types" as const,
+  },
+  {
+    title: "Generation Archives",
+    description: "Explore Kanto through Paldea by regional dex.",
+    to: "/generations" as const,
+  },
+  {
+    title: "Challenge Archives",
+    description: "Open Nuzlocke, shiny, starter, and mono-type generators.",
+    to: "/challenges" as const,
+  },
+];
+
 function HomePage() {
   return (
     <div>
@@ -69,9 +101,76 @@ function HomePage() {
             </p>
           </motion.div>
 
+          <div className="mt-8 grid gap-3 md:grid-cols-4">
+            {quickRoutes.map((route) => (
+              <Link
+                key={route.to}
+                to={route.to}
+                className="rounded-2xl border border-border/70 bg-background/70 p-4 text-left shadow-[var(--shadow-card)] backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary"
+              >
+                <div className="font-display text-base font-bold">{route.title}</div>
+                <p className="mt-1 text-sm text-muted-foreground">{route.description}</p>
+              </Link>
+            ))}
+          </div>
+
           <div className="mt-10">
             <GeneratorSurface basePath="/" ctaLabel="Generate Team" />
           </div>
+        </div>
+      </section>
+
+      {/* FEATURED POKEMON */}
+      <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
+        <SectionHead
+          title="Featured Pokemon"
+          subtitle="Server-rendered spotlight cards that search engines can crawl without waiting for generator interaction."
+        />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {featuredPokemon.map((pokemon) => (
+            <Link
+              key={pokemon.id}
+              to="/pokemon/$slug"
+              params={{ slug: pokemon.slug }}
+              className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-pop)]"
+            >
+              <div
+                className="flex items-center justify-between gap-4 px-5 py-5"
+                style={{
+                  background: `linear-gradient(135deg, ${TYPE_META[pokemon.types[0]].bg}33, ${TYPE_META[pokemon.types[0]].bg}10)`,
+                }}
+              >
+                <div>
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-primary">
+                    #{String(pokemon.id).padStart(4, "0")}
+                  </div>
+                  <h3 className="mt-1 font-display text-xl font-bold">{pokemon.name}</h3>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {pokemon.types.map((type) => (
+                      <span
+                        key={type}
+                        className="rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide"
+                        style={{ background: TYPE_META[type].bg, color: TYPE_META[type].text }}
+                      >
+                        {TYPE_META[type].label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <img
+                  src={spriteUrl(pokemon)}
+                  alt={pokemon.name}
+                  width={120}
+                  height={120}
+                  loading="lazy"
+                  className="h-24 w-24 object-contain transition-transform group-hover:scale-105"
+                />
+              </div>
+              <div className="border-t border-border px-5 py-4 text-sm text-muted-foreground">
+                Generation {pokemon.generation} · BST {pokemon.bst} · Open profile →
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
