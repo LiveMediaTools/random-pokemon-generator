@@ -60,7 +60,7 @@ export function GeneratorSurface({
           <motion.button
             whileTap={{ scale: 0.95, rotate: -10 }}
             onClick={reroll}
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.03]"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.03]"
           >
             <Dices className="h-4 w-4" />
             {ctaLabel}

@@ -40,6 +40,8 @@ export function SiteFooter() {
           <div className="flex gap-4">
             <Link to="/" className="hover:text-foreground">Home</Link>
             <Link to="/challenges/$slug" params={{ slug: "nuzlocke" }} className="hover:text-foreground">Challenges</Link>
+            <Link to="/contact-us" className="hover:text-foreground">Contact Us</Link>
+            <a href="mailto:hello@random-pokemon-generator.com" className="hover:text-foreground">Email</a>
           </div>
         </div>
       </div>

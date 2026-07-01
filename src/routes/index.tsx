@@ -302,7 +302,7 @@ function SectionHead({ title, subtitle, className = "" }: { title: string; subti
 function Why({ icon: Icon, title, desc }: { icon: any; title: string; desc: string }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-      <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-pop)]">
+      <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--gradient-primary)] text-zinc-950 shadow-[var(--shadow-pop)]">
         <Icon className="h-5 w-5" />
       </div>
       <h3 className="mt-3 font-display text-lg font-bold">{title}</h3>
