@@ -7,6 +7,16 @@
   "vars": {
     "VITE_GOOGLE_ANALYTICS_ID": "G-Z8RX4DQNS9"
   },
+  "routes": [
+    {
+      "pattern": "random-pokemon-generator.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.random-pokemon-generator.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
     "enabled": true
   },
