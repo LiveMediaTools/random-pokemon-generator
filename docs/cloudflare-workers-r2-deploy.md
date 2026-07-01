@@ -27,17 +27,17 @@ This project keeps server-side rendering on Cloudflare Workers for SEO, while Po
 Set this before `vite build` or `wrangler deploy`:
 
 ```bash
-export VITE_POKEMON_ASSET_BASE_URL="https://assets.example.com"
+export VITE_POKEMON_ASSET_BASE_URL="https://img.random-pokemon-generator.com"
 ```
 
 The app will then render image URLs like:
 
 ```txt
-https://assets.example.com/pokemon/artwork/25.png
-https://assets.example.com/pokemon/artwork/shiny/25.png
+https://img.random-pokemon-generator.com/pokemon/artwork/25.png
+https://img.random-pokemon-generator.com/pokemon/artwork/shiny/25.png
 ```
 
-If this variable is not set, the app falls back to the existing public PokeAPI artwork URLs.
+If this variable is not set, the app falls back to the default R2 asset domain `https://img.random-pokemon-generator.com`.
 
 ### R2 Upload Script
 
@@ -49,7 +49,7 @@ npx wrangler login
 
 ```bash
 export R2_BUCKET="random-pokemon-assets"
-export R2_PUBLIC_BASE_URL="https://assets.example.com"
+export R2_PUBLIC_BASE_URL="https://img.random-pokemon-generator.com"
 ```
 
 The upload script now uses your Wrangler login session and `wrangler r2 object put --remote`, so no separate R2 S3 access keys are required for one-time asset sync.
@@ -140,7 +140,7 @@ Install dependencies and deploy:
 
 ```bash
 npm install --legacy-peer-deps
-export VITE_POKEMON_ASSET_BASE_URL="https://assets.example.com"
+export VITE_POKEMON_ASSET_BASE_URL="https://img.random-pokemon-generator.com"
 npx wrangler deploy
 ```
 
@@ -155,7 +155,7 @@ The repo already includes a starter `wrangler.jsonc`. Update these values before
 Use a dedicated asset domain such as:
 
 ```txt
-assets.example.com
+img.random-pokemon-generator.com
 ```
 
 Bind that domain to the R2 bucket so image URLs are short, stable, and cache-friendly.
@@ -171,4 +171,4 @@ This is already applied by the upload script.
 
 - `History`, `Favorites`, `Teams`, and `Presets` remain in browser `localStorage`.
 - The Worker does not need to fetch `pokemon.json` from R2 to render pages, which helps SEO and TTFB.
-- The upload script rewrites the mirrored `pokemon/data/pokemon.json` sprite fields to your `R2_PUBLIC_BASE_URL` when that variable is set.
+- The upload script rewrites the mirrored `pokemon/data/pokemon.json` sprite fields to your `R2_PUBLIC_BASE_URL`, which should be `https://img.random-pokemon-generator.com` for this project.

@@ -1,5 +1,5 @@
-const DEFAULT_ARTWORK_BASE =
-  "https://random-pokemon-generator.com/pokemon/artwork";
+const DEFAULT_ASSET_BASE_URL = "https://img.random-pokemon-generator.com";
+const DEFAULT_ARTWORK_BASE = `${DEFAULT_ASSET_BASE_URL}/pokemon/artwork`;
 
 function trimTrailingSlash(value: string | undefined): string | undefined {
   if (!value) return undefined;
@@ -7,7 +7,7 @@ function trimTrailingSlash(value: string | undefined): string | undefined {
 }
 
 function configuredAssetBaseUrl(): string | undefined {
-  return trimTrailingSlash(import.meta.env.VITE_POKEMON_ASSET_BASE_URL);
+  return trimTrailingSlash(import.meta.env.VITE_POKEMON_ASSET_BASE_URL) ?? DEFAULT_ASSET_BASE_URL;
 }
 
 export function pokemonArtworkUrl(id: number, shiny = false): string {
