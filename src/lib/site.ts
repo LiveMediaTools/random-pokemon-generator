@@ -11,6 +11,7 @@ export const DEFAULT_OG_IMAGE_PATH = "/icon-512.png";
 export const DEFAULT_SITE_URL = "https://random-pokemon-generator.com";
 
 export const SITE_URL = trimTrailingSlash(import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL);
+export const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID?.trim() || undefined;
 
 export function getSiteAssetUrl(path: string) {
   return `${SITE_URL}${ensureLeadingSlash(path)}`;

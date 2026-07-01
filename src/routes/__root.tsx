@@ -23,6 +23,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import {
   DEFAULT_OG_IMAGE_PATH,
+  GOOGLE_ANALYTICS_ID,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_THEME_COLOR,
@@ -165,6 +166,19 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {GOOGLE_ANALYTICS_ID ? (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GOOGLE_ANALYTICS_ID}');`,
+              }}
+            />
+          </>
+        ) : null}
         <HeadContent />
       </head>
       <body>

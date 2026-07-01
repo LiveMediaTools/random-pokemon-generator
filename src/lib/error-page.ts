@@ -1,8 +1,21 @@
+import { GOOGLE_ANALYTICS_ID } from "@/lib/site";
+
 export function renderErrorPage(): string {
+  const analyticsSnippet = GOOGLE_ANALYTICS_ID
+    ? `    <script async src="https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GOOGLE_ANALYTICS_ID}');
+    </script>
+`
+    : "";
+
   return `<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+${analyticsSnippet}    <meta charset="utf-8" />
     <title>This page didn't load</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
