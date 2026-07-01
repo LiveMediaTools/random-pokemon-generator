@@ -5,7 +5,6 @@ import { GeneratorSurface } from "@/components/generator-surface";
 import { ALL_POKEMON } from "@/data/pokemon";
 import { PRESETS } from "@/data/presets";
 import { TYPES, TYPE_META, GENERATIONS } from "@/data/types";
-import { spriteUrl } from "@/lib/generator";
 import { buildBreadcrumbSchema, buildCanonicalLink, buildSeoMeta, getCanonicalUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -120,57 +119,37 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED POKEMON */}
+      {/* POPULAR POKEMON LINKS */}
       <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
         <SectionHead
-          title="Featured Pokemon"
-          subtitle="Server-rendered spotlight cards that search engines can crawl without waiting for generator interaction."
+          title="Popular Pokemon Profiles"
+          subtitle="Pure SSR text links that search engines can crawl immediately, without waiting for generator interaction or client-side state."
         />
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {featuredPokemon.map((pokemon) => (
-            <Link
-              key={pokemon.id}
-              to="/pokemon/$slug"
-              params={{ slug: pokemon.slug }}
-              className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-pop)]"
-            >
-              <div
-                className="flex items-center justify-between gap-4 px-5 py-5"
-                style={{
-                  background: `linear-gradient(135deg, ${TYPE_META[pokemon.types[0]].bg}33, ${TYPE_META[pokemon.types[0]].bg}10)`,
-                }}
-              >
-                <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-primary">
-                    #{String(pokemon.id).padStart(4, "0")}
-                  </div>
-                  <h3 className="mt-1 font-display text-xl font-bold">{pokemon.name}</h3>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {pokemon.types.map((type) => (
-                      <span
-                        key={type}
-                        className="rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide"
-                        style={{ background: TYPE_META[type].bg, color: TYPE_META[type].text }}
-                      >
-                        {TYPE_META[type].label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <img
-                  src={spriteUrl(pokemon)}
-                  alt={pokemon.name}
-                  width={120}
-                  height={120}
-                  loading="lazy"
-                  className="h-24 w-24 object-contain transition-transform group-hover:scale-105"
-                />
+            <article key={pokemon.id} className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-primary">
+                #{String(pokemon.id).padStart(4, "0")} · Generation {pokemon.generation}
               </div>
-              <div className="border-t border-border px-5 py-4 text-sm text-muted-foreground">
-                Generation {pokemon.generation} · BST {pokemon.bst} · Open profile →
-              </div>
-            </Link>
+              <h3 className="mt-2 font-display text-xl font-bold">
+                <Link to="/pokemon/$slug" params={{ slug: pokemon.slug }} className="hover:text-primary hover:underline">
+                  {pokemon.name}
+                </Link>
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {pokemon.types.map((type) => TYPE_META[type].label).join(" / ")} · BST {pokemon.bst} ·
+                {" "}
+                <Link to="/pokemon/$slug" params={{ slug: pokemon.slug }} className="font-semibold text-primary hover:underline">
+                  Read full profile
+                </Link>
+              </p>
+            </article>
           ))}
+        </div>
+        <div className="mt-4">
+          <Link to="/pokemon" className="text-sm font-semibold text-primary hover:underline">
+            Browse all Pokemon profile links →
+          </Link>
         </div>
       </section>
 
