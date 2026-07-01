@@ -6,8 +6,19 @@ function trimTrailingSlash(value: string | undefined): string | undefined {
   return value.replace(/\/+$/, "");
 }
 
-function configuredAssetBaseUrl(): string | undefined {
+export function configuredAssetBaseUrl(): string | undefined {
   return trimTrailingSlash(import.meta.env.VITE_POKEMON_ASSET_BASE_URL) ?? DEFAULT_ASSET_BASE_URL;
+}
+
+export function normalizePokemonAssetUrl(input: string, base?: string): string {
+  const assetBaseUrl = configuredAssetBaseUrl();
+  const resolvedUrl = new URL(input, base ?? assetBaseUrl ?? DEFAULT_ASSET_BASE_URL);
+
+  if (assetBaseUrl && resolvedUrl.pathname.startsWith("/pokemon/")) {
+    return `${assetBaseUrl}${resolvedUrl.pathname}${resolvedUrl.search}`;
+  }
+
+  return resolvedUrl.toString();
 }
 
 export function pokemonArtworkUrl(id: number, shiny = false): string {

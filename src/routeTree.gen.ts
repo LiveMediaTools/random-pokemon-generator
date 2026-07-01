@@ -24,6 +24,7 @@ import { Route as TypesTypeRouteImport } from './routes/types.$type'
 import { Route as PokemonSlugRouteImport } from './routes/pokemon.$slug'
 import { Route as GenerationsGenRouteImport } from './routes/generations.$gen'
 import { Route as ChallengesSlugRouteImport } from './routes/challenges.$slug'
+import { Route as ApiAssetRouteImport } from './routes/api.asset'
 
 const RandomPokemonTeamGeneratorRoute =
   RandomPokemonTeamGeneratorRouteImport.update({
@@ -101,6 +102,11 @@ const ChallengesSlugRoute = ChallengesSlugRouteImport.update({
   path: '/challenges/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAssetRoute = ApiAssetRouteImport.update({
+  id: '/api/asset',
+  path: '/api/asset',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof HistoryRoute
   '/random-pokemon-generator': typeof RandomPokemonGeneratorRoute
   '/random-pokemon-team-generator': typeof RandomPokemonTeamGeneratorRoute
+  '/api/asset': typeof ApiAssetRoute
   '/challenges/$slug': typeof ChallengesSlugRoute
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/history': typeof HistoryRoute
   '/random-pokemon-generator': typeof RandomPokemonGeneratorRoute
   '/random-pokemon-team-generator': typeof RandomPokemonTeamGeneratorRoute
+  '/api/asset': typeof ApiAssetRoute
   '/challenges/$slug': typeof ChallengesSlugRoute
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/history': typeof HistoryRoute
   '/random-pokemon-generator': typeof RandomPokemonGeneratorRoute
   '/random-pokemon-team-generator': typeof RandomPokemonTeamGeneratorRoute
+  '/api/asset': typeof ApiAssetRoute
   '/challenges/$slug': typeof ChallengesSlugRoute
   '/generations/$gen': typeof GenerationsGenRoute
   '/pokemon/$slug': typeof PokemonSlugRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/random-pokemon-generator'
     | '/random-pokemon-team-generator'
+    | '/api/asset'
     | '/challenges/$slug'
     | '/generations/$gen'
     | '/pokemon/$slug'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/random-pokemon-generator'
     | '/random-pokemon-team-generator'
+    | '/api/asset'
     | '/challenges/$slug'
     | '/generations/$gen'
     | '/pokemon/$slug'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/random-pokemon-generator'
     | '/random-pokemon-team-generator'
+    | '/api/asset'
     | '/challenges/$slug'
     | '/generations/$gen'
     | '/pokemon/$slug'
@@ -216,6 +228,7 @@ export interface RootRouteChildren {
   HistoryRoute: typeof HistoryRoute
   RandomPokemonGeneratorRoute: typeof RandomPokemonGeneratorRoute
   RandomPokemonTeamGeneratorRoute: typeof RandomPokemonTeamGeneratorRoute
+  ApiAssetRoute: typeof ApiAssetRoute
   ChallengesSlugRoute: typeof ChallengesSlugRoute
   GenerationsGenRoute: typeof GenerationsGenRoute
   PokemonSlugRoute: typeof PokemonSlugRoute
@@ -333,6 +346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChallengesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/asset': {
+      id: '/api/asset'
+      path: '/api/asset'
+      fullPath: '/api/asset'
+      preLoaderRoute: typeof ApiAssetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -344,6 +364,7 @@ const rootRouteChildren: RootRouteChildren = {
   HistoryRoute: HistoryRoute,
   RandomPokemonGeneratorRoute: RandomPokemonGeneratorRoute,
   RandomPokemonTeamGeneratorRoute: RandomPokemonTeamGeneratorRoute,
+  ApiAssetRoute: ApiAssetRoute,
   ChallengesSlugRoute: ChallengesSlugRoute,
   GenerationsGenRoute: GenerationsGenRoute,
   PokemonSlugRoute: PokemonSlugRoute,

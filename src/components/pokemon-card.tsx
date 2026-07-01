@@ -38,6 +38,7 @@ export function PokemonCard({ p, index = 0, shiny = false }: { p: Pokemon; index
           width={180}
           height={180}
           loading="lazy"
+          decoding="async"
           className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-md transition-transform group-hover:scale-110"
         />
       </div>
