@@ -41,24 +41,24 @@ export const Route = createFileRoute("/random-pokemon-generator")({
 
 function Page() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="mb-8 max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="mb-6 max-w-[52rem] lg:mb-8">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
             { label: "Random Generator" },
           ]}
         />
-        <h1 className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">Random Pokemon Generator</h1>
-        <p className="mt-3 text-muted-foreground">
+        <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">Random Pokemon Generator</h1>
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Roll any random Pokémon from the full national Pokédex (1,025 species). Use the basic filters for quick rolls or expand the advanced panel for BST ranges, type exclusions, and rarity gates.
         </p>
       </header>
       <GeneratorSurface basePath="/random-pokemon-generator" initialFilters={{ count: 1 }} />
 
-      <section className="mt-14 grid gap-6 md:grid-cols-2">
-        <article className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-bold">How to use the generator</h2>
+      <section className="mt-10 grid gap-4 lg:mt-14 lg:grid-cols-2 lg:gap-6">
+        <article className="rounded-2xl border border-border bg-card p-4 md:p-5 lg:p-6">
+          <h2 className="font-display text-lg font-bold md:text-xl">How to use the generator</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
             <li>Pick how many Pokémon to roll (1–6).</li>
             <li>Narrow by generation, type, or evolution stage.</li>
@@ -67,8 +67,8 @@ function Page() {
             <li>Share the link — the seed reproduces the exact roll.</li>
           </ol>
         </article>
-        <article className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-bold">Why seeded RNG matters</h2>
+        <article className="rounded-2xl border border-border bg-card p-4 md:p-5 lg:p-6">
+          <h2 className="font-display text-lg font-bold md:text-xl">Why seeded RNG matters</h2>
           <p className="mt-3 text-sm text-muted-foreground">
             Every roll uses a seeded random number generator. That means the same seed + filters always produces the same result. Share a seed and your friend gets the exact same team — useful for streamed runs and group challenges.
           </p>

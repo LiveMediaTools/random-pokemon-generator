@@ -52,8 +52,8 @@ function GenPage() {
   const { meta } = Route.useLoaderData() as { meta: typeof GENERATIONS[number] };
   const region = meta.region[0].toUpperCase() + meta.region.slice(1);
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="mb-8 max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="mb-6 max-w-[52rem] lg:mb-8">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
@@ -62,21 +62,21 @@ function GenPage() {
           ]}
         />
         <Link to="/" className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline">← All generations</Link>
-        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">
           Random {region} Pokémon
         </h1>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Generation {meta.gen} · Pokédex #{meta.range} · the {region} regional dex.
         </p>
       </header>
       <GeneratorSurface basePath={`/generations/${meta.gen}`} initialFilters={{ count: 6, generation: meta.gen }} ctaLabel={`Generate ${region} team`} />
-      <section className="mt-12 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <section className="mt-10 grid gap-3 sm:grid-cols-3 lg:mt-12 lg:grid-cols-5">
         {GENERATIONS.filter((g) => g.gen !== meta.gen).map((g) => (
           <Link
             key={g.gen}
             to="/generations/$gen"
             params={{ gen: String(g.gen) }}
-            className="rounded-2xl border border-border bg-card px-4 py-3 hover:border-primary"
+            className="rounded-2xl border border-border bg-card px-3.5 py-3 hover:border-primary md:px-4"
           >
             <div className="font-display text-sm font-bold">Gen {g.gen}</div>
             <div className="text-xs text-muted-foreground">{g.region[0].toUpperCase() + g.region.slice(1)} · {g.range}</div>

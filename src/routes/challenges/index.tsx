@@ -40,32 +40,32 @@ export const Route = createFileRoute("/challenges/")({
 
 function ChallengesArchivePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="max-w-[52rem]">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
             { label: "Challenges" },
           ]}
         />
-        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">
           Random Pokemon Challenge Archive
         </h1>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Explore curated generators for Nuzlockes, starter picks, shiny hunts, mono-type teams, and other challenge-run formats.
         </p>
       </header>
 
-      <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4">
         {PRESETS.map((preset) => (
           <Link
             key={preset.slug}
             to="/challenges/$slug"
             params={{ slug: preset.slug }}
-            className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-pop)]"
+            className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-pop)] md:p-5"
           >
             <div className="text-[11px] font-semibold uppercase tracking-wider text-primary">Challenge</div>
-            <h2 className="mt-2 font-display text-lg font-bold leading-tight">{preset.title}</h2>
+            <h2 className="mt-2 font-display text-base font-bold leading-tight md:text-lg">{preset.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{preset.description}</p>
             <div className="mt-4 text-xs font-semibold text-primary">Open challenge →</div>
           </Link>

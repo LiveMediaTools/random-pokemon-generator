@@ -29,16 +29,16 @@ export const Route = createFileRoute("/random-pokemon-team-generator")({
 
 function Page() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="mb-8 max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="mb-6 max-w-[52rem] lg:mb-8">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
             { label: "Team Generator" },
           ]}
         />
-        <h1 className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">Random Pokemon Team Generator</h1>
-        <p className="mt-3 text-muted-foreground">
+        <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">Random Pokemon Team Generator</h1>
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Generate a full 6-Pokémon team in one click. Coverage and weakness analysis update with every roll so you can spot the weak link instantly.
         </p>
       </header>

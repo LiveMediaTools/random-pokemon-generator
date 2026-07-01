@@ -56,7 +56,7 @@ function TypePage() {
   return (
     <div>
       <header className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${meta.bg}, ${meta.bg}aa)` }}>
-        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16" style={{ color: meta.text }}>
+        <div className="mx-auto max-w-7xl px-4 py-9 md:px-6 md:py-11 xl:py-16" style={{ color: meta.text }}>
           <SeoBreadcrumbs
             items={[
               { label: "Home", to: "/" },
@@ -69,23 +69,23 @@ function TypePage() {
             separatorClassName="text-white/60"
           />
           <Link to="/" className="text-xs font-semibold uppercase tracking-wider opacity-90 hover:underline">← All types</Link>
-          <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-6xl">
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-5xl xl:text-6xl">
             Random {meta.label}-type Pokémon
           </h1>
-          <p className="mt-3 max-w-2xl opacity-90">
+          <p className="mt-2.5 max-w-[44rem] text-sm opacity-90 md:text-base">
             Roll any random {meta.label}-type Pokémon from the full national Pokédex. Build a mono-{meta.label} team in a single click.
           </p>
         </div>
       </header>
-      <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
         <GeneratorSurface basePath={`/types/${type}`} initialFilters={{ count: 6, type }} ctaLabel={`Generate ${meta.label} team`} />
-        <section className="mt-12 grid gap-3 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-9">
+        <section className="mt-10 grid gap-2.5 sm:grid-cols-3 md:grid-cols-6 lg:mt-12 lg:grid-cols-9">
           {TYPES.filter((t) => t !== type).map((t) => (
             <Link
               key={t}
               to="/types/$type"
               params={{ type: t }}
-              className="rounded-xl px-3 py-2.5 text-center text-xs font-bold uppercase tracking-wider transition-transform hover:scale-105"
+              className="rounded-xl px-2.5 py-2 text-center text-[11px] font-bold uppercase tracking-wider transition-transform hover:scale-105 md:px-3 md:py-2.5 md:text-xs"
               style={{ background: TYPE_META[t].bg, color: TYPE_META[t].text }}
             >
               {TYPE_META[t].label}

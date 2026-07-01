@@ -61,8 +61,8 @@ export const Route = createFileRoute("/challenges/$slug")({
 function ChallengePage() {
   const { preset } = Route.useLoaderData() as { preset: typeof PRESETS[number] };
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="mb-8 max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="mb-6 max-w-[52rem] lg:mb-8">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
@@ -73,21 +73,21 @@ function ChallengePage() {
         <Link to="/" className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline">
           ← All challenges
         </Link>
-        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">{preset.h1}</h1>
-        <p className="mt-3 text-muted-foreground">{preset.intro}</p>
+        <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">{preset.h1}</h1>
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">{preset.intro}</p>
       </header>
 
       <GeneratorSurface basePath={`/challenges/${preset.slug}`} initialFilters={preset.filters} ctaLabel="Generate" />
 
-      <section className="mt-14 grid gap-6 md:grid-cols-2">
-        <article className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-bold">How to play</h2>
+      <section className="mt-10 grid gap-4 lg:mt-14 lg:grid-cols-2 lg:gap-6">
+        <article className="rounded-2xl border border-border bg-card p-4 md:p-5 lg:p-6">
+          <h2 className="font-display text-lg font-bold md:text-xl">How to play</h2>
           <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
             {preset.steps.map((s, i) => <li key={i}>{s}</li>)}
           </ol>
         </article>
-        <article className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-bold">FAQ</h2>
+        <article className="rounded-2xl border border-border bg-card p-4 md:p-5 lg:p-6">
+          <h2 className="font-display text-lg font-bold md:text-xl">FAQ</h2>
           <div className="mt-3 space-y-3">
             {preset.faq.map((f) => (
               <div key={f.q}>
@@ -99,8 +99,8 @@ function ChallengePage() {
         </article>
       </section>
 
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold">Related challenges</h2>
+      <section className="mt-10 lg:mt-12">
+        <h2 className="font-display text-xl font-bold md:text-2xl">Related challenges</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
           {preset.related.map((slug) => {
             const rp = PRESETS.find((x) => x.slug === slug);
@@ -110,7 +110,7 @@ function ChallengePage() {
                 key={slug}
                 to="/challenges/$slug"
                 params={{ slug }}
-                className="rounded-2xl border border-border bg-card p-4 hover:border-primary"
+                className="rounded-2xl border border-border bg-card p-3.5 hover:border-primary md:p-4"
               >
                 <div className="font-display font-bold">{rp.title}</div>
                 <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{rp.description}</p>

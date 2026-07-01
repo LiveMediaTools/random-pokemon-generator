@@ -45,29 +45,29 @@ export const Route = createFileRoute("/types/")({
 
 function TypesArchivePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="max-w-[52rem]">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
             { label: "Types" },
           ]}
         />
-        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">
           Pokemon Types Archive
         </h1>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Jump into mono-type generators, compare coverage themes, and browse all 18 Pokemon types from one archive page.
         </p>
       </header>
 
-      <section className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4">
         {TYPES.map((type) => (
           <Link
             key={type}
             to="/types/$type"
             params={{ type }}
-            className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-pop)]"
+            className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-pop)] md:p-5"
           >
             <div
               className="inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
@@ -75,7 +75,7 @@ function TypesArchivePage() {
             >
               {TYPE_META[type].label}
             </div>
-            <h2 className="mt-3 font-display text-lg font-bold">{TYPE_META[type].label}-type Pokemon</h2>
+            <h2 className="mt-3 font-display text-base font-bold md:text-lg">{TYPE_META[type].label}-type Pokemon</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Explore random {TYPE_META[type].label.toLowerCase()}-type Pokemon and mono-type teams.
             </p>

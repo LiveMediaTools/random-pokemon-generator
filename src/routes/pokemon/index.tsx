@@ -46,23 +46,23 @@ export const Route = createFileRoute("/pokemon/")({
 
 function PokemonArchivePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
-      <header className="max-w-3xl">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 lg:py-14">
+      <header className="max-w-[52rem]">
         <SeoBreadcrumbs
           items={[
             { label: "Home", to: "/" },
             { label: "Pokemon" },
           ]}
         />
-        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+        <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight md:text-4xl xl:text-5xl">
           Pokemon Archive
         </h1>
-        <p className="mt-3 text-muted-foreground">
+        <p className="mt-2.5 text-sm text-muted-foreground md:text-base">
           Explore direct links to every Pokemon profile page in the full National Pokedex, grouped by generation for faster browsing and stronger crawl paths.
         </p>
       </header>
 
-      <section className="mt-8 flex flex-wrap gap-2">
+      <section className="mt-6 flex flex-wrap gap-2 lg:mt-8">
         {pokemonByGeneration.map(({ generation }) => (
           <a
             key={generation.gen}
@@ -74,12 +74,12 @@ function PokemonArchivePage() {
         ))}
       </section>
 
-      <div className="mt-10 space-y-10">
+      <div className="mt-8 space-y-8 lg:mt-10 lg:space-y-10">
         {pokemonByGeneration.map(({ generation, pokemon }) => (
           <section key={generation.gen} id={`gen-${generation.gen}`} className="scroll-mt-24">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h2 className="font-display text-2xl font-extrabold tracking-tight">
+                <h2 className="font-display text-xl font-extrabold tracking-tight md:text-2xl">
                   Generation {generation.gen} · {generation.region[0].toUpperCase() + generation.region.slice(1)}
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -94,13 +94,13 @@ function PokemonArchivePage() {
                 Open generation page →
               </Link>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2 lg:mt-4">
               {pokemon.map((entry) => (
                 <Link
                   key={entry.id}
                   to="/pokemon/$slug"
                   params={{ slug: entry.slug }}
-                  className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground hover:border-primary hover:text-foreground"
+                  className="rounded-full border border-border bg-card px-3 py-1.5 text-[13px] font-medium text-muted-foreground hover:border-primary hover:text-foreground md:text-sm"
                 >
                   {entry.name}
                 </Link>
